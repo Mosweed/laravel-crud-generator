@@ -1,0 +1,35 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ imports }}
+
+class {{ class_name }} extends Model
+{
+    use HasFactory;
+    {{ traits }}
+
+    /**
+     * The table associated with the model.
+     */
+    protected $table = '{{ table_name }}';
+
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        {{ fillable }}
+    ];
+
+    /**
+     * The attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            {{ casts }}
+        ];
+    }
+
+{{ relations }}
+}

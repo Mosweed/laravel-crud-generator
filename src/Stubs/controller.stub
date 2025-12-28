@@ -1,0 +1,105 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use {{ model_namespace }}\{{ model_name }};
+use App\Http\Requests\Store{{ model_name }}Request;
+use App\Http\Requests\Update{{ model_name }}Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class {{ class_name }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): View
+    {
+        $query = {{ model_name }}::query(){{ with_relations }};
+
+        // Zoekfunctionaliteit
+        if ($search = $request->get('search')) {
+            $searchFields = {{ search_fields }};
+            $query->where(function ($q) use ($search, $searchFields) {
+                foreach ($searchFields as $field) {
+                    $q->orWhere($field, 'like', "%{$search}%");
+                }
+            });
+        }
+
+        // Sortering
+        $sortField = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+        $query->orderBy($sortField, $sortDirection);
+
+        ${{ model_variable_plural }} = $query->paginate(config('crud-generator.pagination.per_page', 15));
+
+        return view('{{ view_folder }}.index', compact('{{ model_variable_plural }}'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
+    {
+        ${{ model_variable }} = new {{ model_name }}();
+        
+        return view('{{ view_folder }}.create', compact('{{ model_variable }}'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Store{{ model_name }}Request $request): RedirectResponse
+    {
+        ${{ model_variable }} = {{ model_name }}::create($request->validated());
+
+        return redirect()
+            ->route('{{ route_prefix }}.show', ${{ model_variable }})
+            ->with('success', '{{ model_name }} succesvol aangemaakt.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ model_name }} ${{ model_variable }}): View
+    {
+        ${{ model_variable }}->load([{{ with_relations }}]);
+
+        return view('{{ view_folder }}.show', compact('{{ model_variable }}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{ model_name }} ${{ model_variable }}): View
+    {
+        return view('{{ view_folder }}.edit', compact('{{ model_variable }}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Update{{ model_name }}Request $request, {{ model_name }} ${{ model_variable }}): RedirectResponse
+    {
+        ${{ model_variable }}->update($request->validated());
+
+        return redirect()
+            ->route('{{ route_prefix }}.show', ${{ model_variable }})
+            ->with('success', '{{ model_name }} succesvol bijgewerkt.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ model_name }} ${{ model_variable }}): RedirectResponse
+    {
+        ${{ model_variable }}->delete();
+
+        return redirect()
+            ->route('{{ route_prefix }}.index')
+            ->with('success', '{{ model_name }} succesvol verwijderd.');
+    }
+}

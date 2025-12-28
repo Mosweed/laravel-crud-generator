@@ -1,0 +1,77 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  php-cs-fixer:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install PHP CS Fixer
+        run: composer global require friendsofphp/php-cs-fixer
+
+      - name: Run PHP CS Fixer
+        run: php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes --dry-run --diff
+        continue-on-error: true
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Run PHPStan
+        run: |
+          composer require --dev phpstan/phpstan phpstan/phpstan-phpunit --no-interaction
+          vendor/bin/phpstan analyse src --level=5
+        continue-on-error: true
+
+  pint:
+    name: Laravel Pint
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Run Pint
+        run: |
+          composer require --dev laravel/pint --no-interaction
+          vendor/bin/pint --test
+        continue-on-error: true

@@ -1,0 +1,188 @@
+# CRUD Generator YAML Configuratie
+# ================================
+# Dit bestand definieert meerdere modellen voor automatische CRUD generatie.
+# 
+# Gebruik: php artisan make:crud-yaml crud-config.yaml
+#
+# Veld types:
+#   string, text, integer, bigInteger, float, decimal, boolean,
+#   date, datetime, timestamp, time, json, enum
+#
+# Modifiers:
+#   nullable, unique, index, unsigned, default:value
+#
+# Relatie types:
+#   belongsTo, hasMany, hasOne, belongsToMany, morphTo, morphMany
+
+models:
+  # User model (vaak al aanwezig in Laravel)
+  # User:
+  #   fields:
+  #     name: string
+  #     email:
+  #       type: string
+  #       modifiers: [unique]
+  #     email_verified_at:
+  #       type: datetime
+  #       modifiers: [nullable]
+  #     password: string
+  #     remember_token:
+  #       type: string
+  #       modifiers: [nullable]
+
+  # Category model
+  Category:
+    fields:
+      name: string
+      slug:
+        type: string
+        modifiers: [unique]
+      description:
+        type: text
+        modifiers: [nullable]
+      is_active:
+        type: boolean
+        modifiers: [default:true]
+      parent_id:
+        type: bigInteger
+        modifiers: [nullable, unsigned]
+    relations:
+      - type: hasMany
+        model: Post
+      - type: belongsTo
+        model: Category
+        foreign_key: parent_id
+
+  # Post model (blog artikel)
+  Post:
+    fields:
+      title: string
+      slug:
+        type: string
+        modifiers: [unique]
+      excerpt:
+        type: text
+        modifiers: [nullable]
+      content: text
+      featured_image:
+        type: string
+        modifiers: [nullable]
+      status:
+        type: enum
+        modifiers: [draft, published, archived]
+      published_at:
+        type: datetime
+        modifiers: [nullable]
+      views_count:
+        type: integer
+        modifiers: [default:0]
+    relations:
+      - type: belongsTo
+        model: User
+        foreign_key: author_id
+      - type: belongsTo
+        model: Category
+      - type: hasMany
+        model: Comment
+      - type: belongsToMany
+        model: Tag
+
+  # Comment model
+  Comment:
+    fields:
+      content: text
+      is_approved:
+        type: boolean
+        modifiers: [default:false]
+      parent_id:
+        type: bigInteger
+        modifiers: [nullable, unsigned]
+    relations:
+      - type: belongsTo
+        model: Post
+      - type: belongsTo
+        model: User
+      - type: belongsTo
+        model: Comment
+        foreign_key: parent_id
+
+  # Tag model
+  Tag:
+    fields:
+      name: string
+      slug:
+        type: string
+        modifiers: [unique]
+      color:
+        type: string
+        modifiers: [nullable]
+    relations:
+      - type: belongsToMany
+        model: Post
+
+  # Product model (e-commerce voorbeeld)
+  Product:
+    fields:
+      name: string
+      slug:
+        type: string
+        modifiers: [unique]
+      description: text
+      price:
+        type: decimal
+      sale_price:
+        type: decimal
+        modifiers: [nullable]
+      sku:
+        type: string
+        modifiers: [unique]
+      stock_quantity:
+        type: integer
+        modifiers: [default:0]
+      is_active:
+        type: boolean
+        modifiers: [default:true]
+      is_featured:
+        type: boolean
+        modifiers: [default:false]
+    relations:
+      - type: belongsTo
+        model: Category
+      - type: hasMany
+        model: ProductImage
+      - type: belongsToMany
+        model: Order
+
+  # Order model
+  Order:
+    fields:
+      order_number:
+        type: string
+        modifiers: [unique]
+      status:
+        type: enum
+        modifiers: [pending, processing, shipped, delivered, cancelled]
+      subtotal:
+        type: decimal
+      tax:
+        type: decimal
+      shipping_cost:
+        type: decimal
+      total:
+        type: decimal
+      shipping_address: json
+      billing_address: json
+      notes:
+        type: text
+        modifiers: [nullable]
+      paid_at:
+        type: datetime
+        modifiers: [nullable]
+      shipped_at:
+        type: datetime
+        modifiers: [nullable]
+    relations:
+      - type: belongsTo
+        model: User
+      - type: belongsToMany
+        model: Product

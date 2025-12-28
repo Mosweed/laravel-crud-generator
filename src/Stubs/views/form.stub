@@ -1,0 +1,7 @@
+{{-- Form fields voor {{ model_variable }} --}}
+{{-- 
+    Kleuren worden beheerd via CSS variabelen in crud-theme.css
+    Pas de kleuren aan door de CSS variabelen te wijzigen of een theme class toe te voegen.
+--}}
+
+        {{ form_fields }}

@@ -1,0 +1,348 @@
+/*
+|--------------------------------------------------------------------------
+| CRUD Generator - Component Styles
+|--------------------------------------------------------------------------
+|
+| Dit bestand bevat alle herbruikbare component classes voor CRUD views.
+| Importeer dit bestand in je app.css na de Tailwind imports.
+|
+| INSTALLATIE:
+| 1. Kopieer crud-theme.css en crud-components.css naar resources/css/
+| 2. In resources/css/app.css voeg toe:
+|    @import 'crud-theme.css';
+|    @import 'crud-components.css';
+|
+| THEMA WIJZIGEN:
+| - Pas variabelen aan in crud-theme.css, OF
+| - Voeg een theme class toe aan <body>: <body class="theme-emerald">
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+*/
+
+/* Primary Button */
+.crud-btn-primary {
+    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors duration-150;
+    background-color: var(--crud-primary-600);
+}
+
+.crud-btn-primary:hover {
+    background-color: var(--crud-primary-700);
+}
+
+.crud-btn-primary:focus {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--crud-primary-500);
+}
+
+/* Secondary Button */
+.crud-btn-secondary {
+    @apply inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white transition-colors duration-150;
+}
+
+.crud-btn-secondary:hover {
+    @apply bg-gray-50;
+}
+
+.crud-btn-secondary:focus {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--crud-primary-500);
+}
+
+/* Danger Button */
+.crud-btn-danger {
+    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors duration-150;
+    background-color: var(--crud-danger-600);
+}
+
+.crud-btn-danger:hover {
+    background-color: var(--crud-danger-700);
+}
+
+.crud-btn-danger:focus {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--crud-danger-500);
+}
+
+/* Danger Outline Button */
+.crud-btn-danger-outline {
+    @apply inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium bg-white transition-colors duration-150;
+    border-color: var(--crud-danger-300);
+    color: var(--crud-danger-700);
+}
+
+.crud-btn-danger-outline:hover {
+    background-color: var(--crud-danger-50);
+}
+
+.crud-btn-danger-outline:focus {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--crud-danger-500);
+}
+
+/* Warning Button */
+.crud-btn-warning {
+    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors duration-150;
+    background-color: var(--crud-warning-600);
+}
+
+.crud-btn-warning:hover {
+    background-color: var(--crud-warning-700);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Links
+|--------------------------------------------------------------------------
+*/
+
+.crud-link-primary {
+    @apply font-medium transition-colors duration-150;
+    color: var(--crud-primary-600);
+}
+
+.crud-link-primary:hover {
+    color: var(--crud-primary-900);
+}
+
+.crud-link-info {
+    @apply font-medium transition-colors duration-150;
+    color: var(--crud-info-600);
+}
+
+.crud-link-info:hover {
+    color: var(--crud-info-900);
+}
+
+.crud-link-warning {
+    @apply font-medium transition-colors duration-150;
+    color: var(--crud-warning-600);
+}
+
+.crud-link-warning:hover {
+    color: var(--crud-warning-900);
+}
+
+.crud-link-danger {
+    @apply font-medium transition-colors duration-150;
+    color: var(--crud-danger-600);
+}
+
+.crud-link-danger:hover {
+    color: var(--crud-danger-900);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Alerts
+|--------------------------------------------------------------------------
+*/
+
+.crud-alert-success {
+    background-color: var(--crud-success-50);
+    color: var(--crud-success-800);
+}
+
+.crud-icon-success {
+    color: var(--crud-success-400);
+}
+
+.crud-alert-danger {
+    background-color: var(--crud-danger-50);
+    color: var(--crud-danger-800);
+}
+
+.crud-icon-danger {
+    color: var(--crud-danger-400);
+}
+
+.crud-alert-warning {
+    background-color: var(--crud-warning-50);
+    color: var(--crud-warning-800);
+}
+
+.crud-icon-warning {
+    color: var(--crud-warning-400);
+}
+
+.crud-alert-info {
+    background-color: var(--crud-info-50);
+    color: var(--crud-info-800);
+}
+
+.crud-icon-info {
+    color: var(--crud-info-400);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Form Inputs
+|--------------------------------------------------------------------------
+*/
+
+.crud-input {
+    @apply block w-full rounded-md border-gray-300 shadow-sm sm:text-sm transition-colors duration-150;
+}
+
+.crud-input:focus {
+    border-color: var(--crud-primary-500);
+    --tw-ring-color: var(--crud-primary-500);
+    @apply ring-1;
+}
+
+.crud-input-error {
+    @apply border-red-500;
+}
+
+.crud-textarea {
+    @apply block w-full rounded-md border-gray-300 shadow-sm sm:text-sm transition-colors duration-150;
+}
+
+.crud-textarea:focus {
+    border-color: var(--crud-primary-500);
+    --tw-ring-color: var(--crud-primary-500);
+    @apply ring-1;
+}
+
+.crud-select {
+    @apply block w-full rounded-md border-gray-300 shadow-sm sm:text-sm transition-colors duration-150;
+}
+
+.crud-select:focus {
+    border-color: var(--crud-primary-500);
+    --tw-ring-color: var(--crud-primary-500);
+    @apply ring-1;
+}
+
+.crud-checkbox {
+    @apply h-4 w-4 rounded border-gray-300 transition-colors duration-150;
+    color: var(--crud-primary-600);
+}
+
+.crud-checkbox:focus {
+    --tw-ring-color: var(--crud-primary-500);
+}
+
+.crud-radio {
+    @apply h-4 w-4 border-gray-300 transition-colors duration-150;
+    color: var(--crud-primary-600);
+}
+
+.crud-radio:focus {
+    --tw-ring-color: var(--crud-primary-500);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Labels
+|--------------------------------------------------------------------------
+*/
+
+.crud-label {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+.crud-label-error {
+    @apply mt-1 text-sm text-red-600;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Cards
+|--------------------------------------------------------------------------
+*/
+
+.crud-card {
+    @apply bg-white shadow overflow-hidden sm:rounded-lg;
+}
+
+.crud-card-header {
+    @apply px-4 py-5 sm:px-6 border-b border-gray-200;
+}
+
+.crud-card-title {
+    @apply text-lg leading-6 font-medium text-gray-900;
+}
+
+.crud-card-subtitle {
+    @apply mt-1 max-w-2xl text-sm text-gray-500;
+}
+
+.crud-card-body {
+    @apply px-4 py-5 sm:p-6;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Tables
+|--------------------------------------------------------------------------
+*/
+
+.crud-table {
+    @apply min-w-full divide-y divide-gray-200;
+}
+
+.crud-table-header {
+    @apply bg-gray-50;
+}
+
+.crud-table-th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+
+.crud-table-row {
+    @apply hover:bg-gray-50 transition-colors duration-150;
+}
+
+.crud-table-td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Badges
+|--------------------------------------------------------------------------
+*/
+
+.crud-badge-primary {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background-color: var(--crud-primary-100);
+    color: var(--crud-primary-800);
+}
+
+.crud-badge-success {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background-color: var(--crud-success-100);
+    color: var(--crud-success-800);
+}
+
+.crud-badge-danger {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background-color: var(--crud-danger-100);
+    color: var(--crud-danger-800);
+}
+
+.crud-badge-warning {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background-color: var(--crud-warning-100);
+    color: var(--crud-warning-800);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Pagination (Override Laravel default)
+|--------------------------------------------------------------------------
+*/
+
+.crud-pagination .page-link {
+    color: var(--crud-primary-600);
+}
+
+.crud-pagination .page-item.active .page-link {
+    background-color: var(--crud-primary-600);
+    border-color: var(--crud-primary-600);
+}

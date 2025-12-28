@@ -1,0 +1,118 @@
+@extends('layouts.app')
+
+@section('title', '{{ model_name_plural }} Overzicht')
+
+@section('content')
+<div class="py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="sm:flex sm:items-center sm:justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{{ model_name_plural }}</h1>
+                <p class="mt-1 text-sm text-gray-500">Beheer alle {{ model_name_plural }} in het systeem.</p>
+            </div>
+            <div class="mt-4 sm:mt-0">
+                <a href="{{ route('{{ route_prefix }}.create') }}" 
+                   class="crud-btn-primary">
+                    <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Nieuwe {{ model_name }}
+                </a>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        @if(session('success'))
+            <div class="mb-4 rounded-md crud-alert-success p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 crud-icon-success" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">{{ session('success') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Search -->
+        <div class="mb-6">
+            <form action="{{ route('{{ route_prefix }}.index') }}" method="GET" class="flex gap-4">
+                <div class="flex-1">
+                    <input type="text" name="search" value="{{ request('search') }}" 
+                           placeholder="Zoeken..."
+                           class="crud-input">
+                </div>
+                <button type="submit" class="crud-btn-secondary">
+                    Zoeken
+                </button>
+                @if(request('search'))
+                    <a href="{{ route('{{ route_prefix }}.index') }}" class="crud-btn-secondary">
+                        Reset
+                    </a>
+                @endif
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                    {{ table_headers }}
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse(${{ model_variable_plural }} as ${{ model_variable }})
+                        <tr class="hover:bg-gray-50">
+                    {{ table_body }}
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{{ route('{{ route_prefix }}.show', ${{ model_variable }}) }}" 
+                                   class="crud-link-info mr-3">Bekijken</a>
+                                <a href="{{ route('{{ route_prefix }}.edit', ${{ model_variable }}) }}" 
+                                   class="crud-link-warning mr-3">Bewerken</a>
+                                <form action="{{ route('{{ route_prefix }}.destroy', ${{ model_variable }}) }}" 
+                                      method="POST" 
+                                      class="inline"
+                                      onsubmit="return confirm('Weet je zeker dat je dit wilt verwijderen?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="crud-link-danger">Verwijderen</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="100%" class="px-6 py-12 text-center text-gray-500">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                                </svg>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Geen {{ model_name_plural }} gevonden</h3>
+                                <p class="mt-1 text-sm text-gray-500">Begin met het aanmaken van een nieuwe {{ model_name }}.</p>
+                                <div class="mt-6">
+                                    <a href="{{ route('{{ route_prefix }}.create') }}" class="crud-btn-primary">
+                                        <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                        </svg>
+                                        Nieuwe {{ model_name }}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        @if(${{ model_variable_plural }}->hasPages())
+            <div class="mt-6">
+                {{ ${{ model_variable_plural }}->withQueryString()->links() }}
+            </div>
+        @endif
+    </div>
+</div>
+@endsection

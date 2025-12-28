@@ -1,0 +1,66 @@
+@extends('layouts.app')
+
+@section('title', '{{ model_name }} bewerken')
+
+@section('content')
+<div class="py-6">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-4">
+                    <li>
+                        <a href="{{ route('{{ route_prefix }}.index') }}" class="text-gray-400 hover:text-gray-500">
+                            {{ model_name }}
+                        </a>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="ml-4 text-sm font-medium text-gray-500">#{{ ${{ model_variable }}->id }}</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="ml-4 text-sm font-medium text-gray-500">Bewerken</span>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="mt-4 text-2xl font-bold text-gray-900">{{ model_name }} bewerken</h1>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-white shadow sm:rounded-lg">
+            <form action="{{ route('{{ route_prefix }}.update', ${{ model_variable }}) }}" method="POST" class="space-y-6 p-6">
+                @csrf
+                @method('PUT')
+                
+                @include('{{ route_prefix }}._form')
+
+                <div class="flex justify-between pt-6 border-t border-gray-200">
+                    <form action="{{ route('{{ route_prefix }}.destroy', ${{ model_variable }}) }}" 
+                          method="POST"
+                          onsubmit="return confirm('Weet je zeker dat je dit wilt verwijderen?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="crud-btn-danger-outline">
+                            Verwijderen
+                        </button>
+                    </form>
+                    
+                    <div class="flex space-x-3">
+                        <a href="{{ route('{{ route_prefix }}.show', ${{ model_variable }}) }}" class="crud-btn-secondary">
+                            Annuleren
+                        </a>
+                        <button type="submit" class="crud-btn-primary">
+                            Bijwerken
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

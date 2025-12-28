@@ -1,0 +1,357 @@
+/*
+|--------------------------------------------------------------------------
+| CRUD Generator - CSS Variabelen
+|--------------------------------------------------------------------------
+|
+| Pas deze variabelen aan om de kleuren van je CRUD views te wijzigen.
+| Voeg dit toe aan je resources/css/app.css of importeer het.
+|
+| GEBRUIK:
+| 1. Kopieer dit bestand naar resources/css/crud.css
+| 2. Importeer in app.css: @import 'crud.css';
+| 3. Pas de kleuren aan naar wens
+|
+*/
+
+:root {
+    /*
+    |--------------------------------------------------------------------------
+    | Primaire Kleur (Indigo standaard)
+    |--------------------------------------------------------------------------
+    | Gebruikt voor: knoppen, links, focus states, checkboxes
+    | Verander naar je merk kleur
+    */
+    --crud-primary-50:  #eef2ff;
+    --crud-primary-100: #e0e7ff;
+    --crud-primary-200: #c7d2fe;
+    --crud-primary-300: #a5b4fc;
+    --crud-primary-400: #818cf8;
+    --crud-primary-500: #6366f1;
+    --crud-primary-600: #4f46e5;  /* Hoofdkleur */
+    --crud-primary-700: #4338ca;  /* Hover */
+    --crud-primary-800: #3730a3;
+    --crud-primary-900: #312e81;
+    --crud-primary-950: #1e1b4b;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Success Kleur (Groen)
+    |--------------------------------------------------------------------------
+    | Gebruikt voor: success meldingen, badges
+    */
+    --crud-success-50:  #f0fdf4;
+    --crud-success-100: #dcfce7;
+    --crud-success-400: #4ade80;
+    --crud-success-500: #22c55e;
+    --crud-success-600: #16a34a;
+    --crud-success-700: #15803d;
+    --crud-success-800: #166534;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Danger Kleur (Rood)
+    |--------------------------------------------------------------------------
+    | Gebruikt voor: delete knoppen, error meldingen
+    */
+    --crud-danger-50:  #fef2f2;
+    --crud-danger-100: #fee2e2;
+    --crud-danger-300: #fca5a5;
+    --crud-danger-400: #f87171;
+    --crud-danger-500: #ef4444;
+    --crud-danger-600: #dc2626;
+    --crud-danger-700: #b91c1c;
+    --crud-danger-800: #991b1b;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Warning Kleur (Geel/Amber)
+    |--------------------------------------------------------------------------
+    | Gebruikt voor: edit knoppen, waarschuwingen
+    */
+    --crud-warning-50:  #fffbeb;
+    --crud-warning-100: #fef3c7;
+    --crud-warning-400: #fbbf24;
+    --crud-warning-500: #f59e0b;
+    --crud-warning-600: #d97706;
+    --crud-warning-700: #b45309;
+    --crud-warning-800: #92400e;
+    --crud-warning-900: #78350f;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Info Kleur (Blauw)
+    |--------------------------------------------------------------------------
+    | Gebruikt voor: info links, view knoppen
+    */
+    --crud-info-50:  #eff6ff;
+    --crud-info-100: #dbeafe;
+    --crud-info-400: #60a5fa;
+    --crud-info-500: #3b82f6;
+    --crud-info-600: #2563eb;
+    --crud-info-700: #1d4ed8;
+    --crud-info-800: #1e40af;
+    --crud-info-900: #1e3a8a;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Voorgedefinieerde Thema's
+|--------------------------------------------------------------------------
+| Voeg één van deze classes toe aan je <body> of <html> tag
+| Voorbeeld: <body class="theme-emerald">
+*/
+
+/* Blauw thema */
+.theme-blue {
+    --crud-primary-50:  #eff6ff;
+    --crud-primary-100: #dbeafe;
+    --crud-primary-200: #bfdbfe;
+    --crud-primary-300: #93c5fd;
+    --crud-primary-400: #60a5fa;
+    --crud-primary-500: #3b82f6;
+    --crud-primary-600: #2563eb;
+    --crud-primary-700: #1d4ed8;
+    --crud-primary-800: #1e40af;
+    --crud-primary-900: #1e3a8a;
+    --crud-primary-950: #172554;
+}
+
+/* Groen / Emerald thema */
+.theme-emerald {
+    --crud-primary-50:  #ecfdf5;
+    --crud-primary-100: #d1fae5;
+    --crud-primary-200: #a7f3d0;
+    --crud-primary-300: #6ee7b7;
+    --crud-primary-400: #34d399;
+    --crud-primary-500: #10b981;
+    --crud-primary-600: #059669;
+    --crud-primary-700: #047857;
+    --crud-primary-800: #065f46;
+    --crud-primary-900: #064e3b;
+    --crud-primary-950: #022c22;
+}
+
+/* Teal thema */
+.theme-teal {
+    --crud-primary-50:  #f0fdfa;
+    --crud-primary-100: #ccfbf1;
+    --crud-primary-200: #99f6e4;
+    --crud-primary-300: #5eead4;
+    --crud-primary-400: #2dd4bf;
+    --crud-primary-500: #14b8a6;
+    --crud-primary-600: #0d9488;
+    --crud-primary-700: #0f766e;
+    --crud-primary-800: #115e59;
+    --crud-primary-900: #134e4a;
+    --crud-primary-950: #042f2e;
+}
+
+/* Cyaan thema */
+.theme-cyan {
+    --crud-primary-50:  #ecfeff;
+    --crud-primary-100: #cffafe;
+    --crud-primary-200: #a5f3fc;
+    --crud-primary-300: #67e8f9;
+    --crud-primary-400: #22d3ee;
+    --crud-primary-500: #06b6d4;
+    --crud-primary-600: #0891b2;
+    --crud-primary-700: #0e7490;
+    --crud-primary-800: #155e75;
+    --crud-primary-900: #164e63;
+    --crud-primary-950: #083344;
+}
+
+/* Sky thema */
+.theme-sky {
+    --crud-primary-50:  #f0f9ff;
+    --crud-primary-100: #e0f2fe;
+    --crud-primary-200: #bae6fd;
+    --crud-primary-300: #7dd3fc;
+    --crud-primary-400: #38bdf8;
+    --crud-primary-500: #0ea5e9;
+    --crud-primary-600: #0284c7;
+    --crud-primary-700: #0369a1;
+    --crud-primary-800: #075985;
+    --crud-primary-900: #0c4a6e;
+    --crud-primary-950: #082f49;
+}
+
+/* Violet thema */
+.theme-violet {
+    --crud-primary-50:  #f5f3ff;
+    --crud-primary-100: #ede9fe;
+    --crud-primary-200: #ddd6fe;
+    --crud-primary-300: #c4b5fd;
+    --crud-primary-400: #a78bfa;
+    --crud-primary-500: #8b5cf6;
+    --crud-primary-600: #7c3aed;
+    --crud-primary-700: #6d28d9;
+    --crud-primary-800: #5b21b6;
+    --crud-primary-900: #4c1d95;
+    --crud-primary-950: #2e1065;
+}
+
+/* Paars thema */
+.theme-purple {
+    --crud-primary-50:  #faf5ff;
+    --crud-primary-100: #f3e8ff;
+    --crud-primary-200: #e9d5ff;
+    --crud-primary-300: #d8b4fe;
+    --crud-primary-400: #c084fc;
+    --crud-primary-500: #a855f7;
+    --crud-primary-600: #9333ea;
+    --crud-primary-700: #7e22ce;
+    --crud-primary-800: #6b21a8;
+    --crud-primary-900: #581c87;
+    --crud-primary-950: #3b0764;
+}
+
+/* Fuchsia thema */
+.theme-fuchsia {
+    --crud-primary-50:  #fdf4ff;
+    --crud-primary-100: #fae8ff;
+    --crud-primary-200: #f5d0fe;
+    --crud-primary-300: #f0abfc;
+    --crud-primary-400: #e879f9;
+    --crud-primary-500: #d946ef;
+    --crud-primary-600: #c026d3;
+    --crud-primary-700: #a21caf;
+    --crud-primary-800: #86198f;
+    --crud-primary-900: #701a75;
+    --crud-primary-950: #4a044e;
+}
+
+/* Roze thema */
+.theme-pink {
+    --crud-primary-50:  #fdf2f8;
+    --crud-primary-100: #fce7f3;
+    --crud-primary-200: #fbcfe8;
+    --crud-primary-300: #f9a8d4;
+    --crud-primary-400: #f472b6;
+    --crud-primary-500: #ec4899;
+    --crud-primary-600: #db2777;
+    --crud-primary-700: #be185d;
+    --crud-primary-800: #9d174d;
+    --crud-primary-900: #831843;
+    --crud-primary-950: #500724;
+}
+
+/* Rose thema */
+.theme-rose {
+    --crud-primary-50:  #fff1f2;
+    --crud-primary-100: #ffe4e6;
+    --crud-primary-200: #fecdd3;
+    --crud-primary-300: #fda4af;
+    --crud-primary-400: #fb7185;
+    --crud-primary-500: #f43f5e;
+    --crud-primary-600: #e11d48;
+    --crud-primary-700: #be123c;
+    --crud-primary-800: #9f1239;
+    --crud-primary-900: #881337;
+    --crud-primary-950: #4c0519;
+}
+
+/* Rood thema */
+.theme-red {
+    --crud-primary-50:  #fef2f2;
+    --crud-primary-100: #fee2e2;
+    --crud-primary-200: #fecaca;
+    --crud-primary-300: #fca5a5;
+    --crud-primary-400: #f87171;
+    --crud-primary-500: #ef4444;
+    --crud-primary-600: #dc2626;
+    --crud-primary-700: #b91c1c;
+    --crud-primary-800: #991b1b;
+    --crud-primary-900: #7f1d1d;
+    --crud-primary-950: #450a0a;
+}
+
+/* Oranje thema */
+.theme-orange {
+    --crud-primary-50:  #fff7ed;
+    --crud-primary-100: #ffedd5;
+    --crud-primary-200: #fed7aa;
+    --crud-primary-300: #fdba74;
+    --crud-primary-400: #fb923c;
+    --crud-primary-500: #f97316;
+    --crud-primary-600: #ea580c;
+    --crud-primary-700: #c2410c;
+    --crud-primary-800: #9a3412;
+    --crud-primary-900: #7c2d12;
+    --crud-primary-950: #431407;
+}
+
+/* Amber thema */
+.theme-amber {
+    --crud-primary-50:  #fffbeb;
+    --crud-primary-100: #fef3c7;
+    --crud-primary-200: #fde68a;
+    --crud-primary-300: #fcd34d;
+    --crud-primary-400: #fbbf24;
+    --crud-primary-500: #f59e0b;
+    --crud-primary-600: #d97706;
+    --crud-primary-700: #b45309;
+    --crud-primary-800: #92400e;
+    --crud-primary-900: #78350f;
+    --crud-primary-950: #451a03;
+}
+
+/* Lime thema */
+.theme-lime {
+    --crud-primary-50:  #f7fee7;
+    --crud-primary-100: #ecfccb;
+    --crud-primary-200: #d9f99d;
+    --crud-primary-300: #bef264;
+    --crud-primary-400: #a3e635;
+    --crud-primary-500: #84cc16;
+    --crud-primary-600: #65a30d;
+    --crud-primary-700: #4d7c0f;
+    --crud-primary-800: #3f6212;
+    --crud-primary-900: #365314;
+    --crud-primary-950: #1a2e05;
+}
+
+/* Groen thema */
+.theme-green {
+    --crud-primary-50:  #f0fdf4;
+    --crud-primary-100: #dcfce7;
+    --crud-primary-200: #bbf7d0;
+    --crud-primary-300: #86efac;
+    --crud-primary-400: #4ade80;
+    --crud-primary-500: #22c55e;
+    --crud-primary-600: #16a34a;
+    --crud-primary-700: #15803d;
+    --crud-primary-800: #166534;
+    --crud-primary-900: #14532d;
+    --crud-primary-950: #052e16;
+}
+
+/* Slate thema */
+.theme-slate {
+    --crud-primary-50:  #f8fafc;
+    --crud-primary-100: #f1f5f9;
+    --crud-primary-200: #e2e8f0;
+    --crud-primary-300: #cbd5e1;
+    --crud-primary-400: #94a3b8;
+    --crud-primary-500: #64748b;
+    --crud-primary-600: #475569;
+    --crud-primary-700: #334155;
+    --crud-primary-800: #1e293b;
+    --crud-primary-900: #0f172a;
+    --crud-primary-950: #020617;
+}
+
+/* Zinc thema */
+.theme-zinc {
+    --crud-primary-50:  #fafafa;
+    --crud-primary-100: #f4f4f5;
+    --crud-primary-200: #e4e4e7;
+    --crud-primary-300: #d4d4d8;
+    --crud-primary-400: #a1a1aa;
+    --crud-primary-500: #71717a;
+    --crud-primary-600: #52525b;
+    --crud-primary-700: #3f3f46;
+    --crud-primary-800: #27272a;
+    --crud-primary-900: #18181b;
+    --crud-primary-950: #09090b;
+}

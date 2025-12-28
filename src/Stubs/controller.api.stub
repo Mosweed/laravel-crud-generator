@@ -1,0 +1,98 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use {{ model_namespace }}\{{ model_name }};
+use App\Http\Requests\Store{{ model_name }}Request;
+use App\Http\Requests\Update{{ model_name }}Request;
+use App\Http\Resources\{{ resource_name }};
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
+class {{ class_name }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): AnonymousResourceCollection
+    {
+        $query = {{ model_name }}::query(){{ with_relations }};
+
+        // Zoekfunctionaliteit
+        if ($search = $request->get('search')) {
+            $searchFields = {{ search_fields }};
+            $query->where(function ($q) use ($search, $searchFields) {
+                foreach ($searchFields as $field) {
+                    $q->orWhere($field, 'like', "%{$search}%");
+                }
+            });
+        }
+
+        // Filter op specifieke velden
+        foreach ($request->except(['search', 'sort', 'direction', 'page', 'per_page']) as $field => $value) {
+            if (!empty($value)) {
+                $query->where($field, $value);
+            }
+        }
+
+        // Sortering
+        $sortField = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+        $query->orderBy($sortField, $sortDirection);
+
+        $perPage = min($request->get('per_page', 15), 100);
+        ${{ model_variable_plural }} = $query->paginate($perPage);
+
+        return {{ resource_name }}::collection(${{ model_variable_plural }});
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Store{{ model_name }}Request $request): JsonResponse
+    {
+        ${{ model_variable }} = {{ model_name }}::create($request->validated());
+
+        return response()->json([
+            'message' => '{{ model_name }} succesvol aangemaakt.',
+            'data' => new {{ resource_name }}(${{ model_variable }}),
+        ], 201);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ model_name }} ${{ model_variable }}): {{ resource_name }}
+    {
+        ${{ model_variable }}->load([{{ with_relations }}]);
+
+        return new {{ resource_name }}(${{ model_variable }});
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Update{{ model_name }}Request $request, {{ model_name }} ${{ model_variable }}): JsonResponse
+    {
+        ${{ model_variable }}->update($request->validated());
+
+        return response()->json([
+            'message' => '{{ model_name }} succesvol bijgewerkt.',
+            'data' => new {{ resource_name }}(${{ model_variable }}),
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ model_name }} ${{ model_variable }}): JsonResponse
+    {
+        ${{ model_variable }}->delete();
+
+        return response()->json([
+            'message' => '{{ model_name }} succesvol verwijderd.',
+        ]);
+    }
+}
