@@ -54,7 +54,7 @@ jobs:
         run: vendor/bin/phpunit --coverage-text
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: matrix.php == '8.3' && matrix.laravel == '12.*'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
