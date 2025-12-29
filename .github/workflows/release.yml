@@ -15,7 +15,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -35,7 +35,7 @@ jobs:
 
       - name: Generate changelog
         id: changelog
-        uses: metcalfc/changelog-generator@v4.6.2
+        uses: metcalfc/changelog-generator@v4.3.1
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -67,7 +67,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Update version badge in README
         run: |

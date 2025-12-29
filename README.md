@@ -6,9 +6,9 @@
 [![Total Downloads](https://poser.pugx.org/mosweed/laravel-crud-generator/downloads)](https://packagist.org/packages/mosweed/laravel-crud-generator)
 [![License](https://poser.pugx.org/mosweed/laravel-crud-generator/license)](https://packagist.org/packages/mosweed/laravel-crud-generator)
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-red)](https://laravel.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-11.x%20|%2012.x-red)](https://laravel.com)
 
-Een krachtige Laravel 12 package van **Mosweed** om automatisch complete CRUD functionaliteit te genereren inclusief migrations, seeders, factories, models, controllers, views, routes en relaties.
+Een krachtige Laravel package van **Mosweed** om automatisch complete CRUD functionaliteit te genereren inclusief migrations, seeders, factories, models, controllers, views, routes en relaties.
 
 ## 🚀 Features
 
