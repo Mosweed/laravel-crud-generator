@@ -59,10 +59,12 @@ Dit maakt de volgende bestanden aan:
 @tailwind components;
 @tailwind utilities;
 
-/* CRUD Generator styles */
-@import 'vendor/crud-generator/crud-theme.css';
-@import 'vendor/crud-generator/crud-components.css';
+/* CRUD Generator styles - let op de ./ voor relatief pad */
+@import './vendor/crud-generator/crud-theme.css';
+@import './vendor/crud-generator/crud-components.css';
 ```
+
+> ⚠️ **Belangrijk:** Zorg dat je eerst `php artisan vendor:publish --tag=crud-generator-assets` hebt uitgevoerd!
 
 ### Thema Wijzigen
 
@@ -254,15 +256,19 @@ models:
     fields:
       title: string
       body: text
-      status:
-        type: enum
-        modifiers: [draft, published]
+      # Enum syntax: gebruik "enum:value1:value2:value3"
+      status: "enum:draft:published:archived"
+      published_at:
+        type: datetime
+        modifiers: [nullable]
     relations:
       - type: belongsTo
         model: User
       - type: belongsTo
         model: Category
 ```
+
+> ⚠️ **Let op bij enum types:** Gebruik `"enum:value1:value2"` syntax, niet `modifiers: [value1, value2]`
 
 Voer uit:
 

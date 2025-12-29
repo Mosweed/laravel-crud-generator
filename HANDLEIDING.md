@@ -48,10 +48,12 @@ Open `resources/css/app.css` en voeg toe:
 @tailwind components;
 @tailwind utilities;
 
-/* CRUD Generator styles - voeg deze regels toe */
-@import 'vendor/crud-generator/crud-theme.css';
-@import 'vendor/crud-generator/crud-components.css';
+/* CRUD Generator styles - let op de ./ voor relatief pad */
+@import './vendor/crud-generator/crud-theme.css';
+@import './vendor/crud-generator/crud-components.css';
 ```
+
+> ⚠️ **Belangrijk:** Zorg dat je eerst stap 1.3 hebt uitgevoerd (vendor:publish)!
 
 ### Stap 1.5: CSS Compileren
 
@@ -307,8 +309,8 @@ models:
       excerpt:
         type: text
         modifiers: [nullable]
-      is_published:
-        type: boolean
+      # BELANGRIJK: Enum syntax is "enum:value1:value2:value3"
+      status: "enum:draft:published:archived"
       published_at:
         type: datetime
         modifiers: [nullable]
@@ -349,6 +351,8 @@ models:
       - type: belongsToMany
         model: Post
 ```
+
+> ⚠️ **Let op bij enum types:** Gebruik NIET `modifiers: [draft, published]` maar `"enum:draft:published"` als type!
 
 ### Stap 6.2: Genereer alle Models
 

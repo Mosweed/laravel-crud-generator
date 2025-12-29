@@ -13,23 +13,12 @@
 #
 # Relatie types:
 #   belongsTo, hasMany, hasOne, belongsToMany, morphTo, morphMany
+#
+# LET OP voor enum:
+#   Bij enum types worden de waarden NA de type gezet, niet als modifiers!
+#   Voorbeeld: status:enum:draft:published:archived
 
 models:
-  # User model (vaak al aanwezig in Laravel)
-  # User:
-  #   fields:
-  #     name: string
-  #     email:
-  #       type: string
-  #       modifiers: [unique]
-  #     email_verified_at:
-  #       type: datetime
-  #       modifiers: [nullable]
-  #     password: string
-  #     remember_token:
-  #       type: string
-  #       modifiers: [nullable]
-
   # Category model
   Category:
     fields:
@@ -42,16 +31,10 @@ models:
         modifiers: [nullable]
       is_active:
         type: boolean
-        modifiers: [default:true]
-      parent_id:
-        type: bigInteger
-        modifiers: [nullable, unsigned]
+        modifiers: ["default:true"]
     relations:
       - type: hasMany
         model: Post
-      - type: belongsTo
-        model: Category
-        foreign_key: parent_id
 
   # Post model (blog artikel)
   Post:
@@ -67,15 +50,14 @@ models:
       featured_image:
         type: string
         modifiers: [nullable]
-      status:
-        type: enum
-        modifiers: [draft, published, archived]
+      # Enum syntax: type is "enum:value1:value2:value3"
+      status: "enum:draft:published:archived"
       published_at:
         type: datetime
         modifiers: [nullable]
       views_count:
         type: integer
-        modifiers: [default:0]
+        modifiers: ["default:0"]
     relations:
       - type: belongsTo
         model: User
@@ -93,18 +75,12 @@ models:
       content: text
       is_approved:
         type: boolean
-        modifiers: [default:false]
-      parent_id:
-        type: bigInteger
-        modifiers: [nullable, unsigned]
+        modifiers: ["default:false"]
     relations:
       - type: belongsTo
         model: Post
       - type: belongsTo
         model: User
-      - type: belongsTo
-        model: Comment
-        foreign_key: parent_id
 
   # Tag model
   Tag:
@@ -128,8 +104,7 @@ models:
         type: string
         modifiers: [unique]
       description: text
-      price:
-        type: decimal
+      price: decimal
       sale_price:
         type: decimal
         modifiers: [nullable]
@@ -138,20 +113,35 @@ models:
         modifiers: [unique]
       stock_quantity:
         type: integer
-        modifiers: [default:0]
+        modifiers: ["default:0"]
       is_active:
         type: boolean
-        modifiers: [default:true]
+        modifiers: ["default:true"]
       is_featured:
         type: boolean
-        modifiers: [default:false]
+        modifiers: ["default:false"]
     relations:
       - type: belongsTo
         model: Category
       - type: hasMany
-        model: ProductImage
-      - type: belongsToMany
-        model: Order
+        model: Review
+
+  # Review model
+  Review:
+    fields:
+      rating:
+        type: integer
+        modifiers: [unsigned]
+      title: string
+      body: text
+      is_approved:
+        type: boolean
+        modifiers: ["default:false"]
+    relations:
+      - type: belongsTo
+        model: Product
+      - type: belongsTo
+        model: User
 
   # Order model
   Order:
@@ -159,17 +149,12 @@ models:
       order_number:
         type: string
         modifiers: [unique]
-      status:
-        type: enum
-        modifiers: [pending, processing, shipped, delivered, cancelled]
-      subtotal:
-        type: decimal
-      tax:
-        type: decimal
-      shipping_cost:
-        type: decimal
-      total:
-        type: decimal
+      # Enum met inline syntax
+      status: "enum:pending:processing:shipped:delivered:cancelled"
+      subtotal: decimal
+      tax: decimal
+      shipping_cost: decimal
+      total: decimal
       shipping_address: json
       billing_address: json
       notes:
@@ -184,5 +169,3 @@ models:
     relations:
       - type: belongsTo
         model: User
-      - type: belongsToMany
-        model: Product

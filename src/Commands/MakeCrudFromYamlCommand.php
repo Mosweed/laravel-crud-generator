@@ -65,11 +65,20 @@ class MakeCrudFromYamlCommand extends Command
         $formatted = [];
         foreach ($fields as $fieldName => $fieldConfig) {
             if (is_string($fieldConfig)) {
+                // Simpele string of enum:value1:value2 syntax
                 $formatted[] = "{$fieldName}:{$fieldConfig}";
             } else {
                 $type = $fieldConfig['type'] ?? 'string';
                 $modifiers = $fieldConfig['modifiers'] ?? [];
-                $modifierStr = implode(':', $modifiers);
+                
+                // Filter out enum values from modifiers (voor backwards compatibility)
+                $realModifiers = array_filter($modifiers, function($mod) {
+                    // Echte modifiers zijn: nullable, unique, index, unsigned, default:X
+                    return in_array($mod, ['nullable', 'unique', 'index', 'unsigned']) 
+                        || str_starts_with($mod, 'default:');
+                });
+                
+                $modifierStr = implode(':', $realModifiers);
                 $formatted[] = $modifierStr ? "{$fieldName}:{$type}:{$modifierStr}" : "{$fieldName}:{$type}";
             }
         }
