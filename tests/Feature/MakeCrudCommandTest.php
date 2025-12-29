@@ -2,12 +2,14 @@
 
 namespace Mosweed\CrudGenerator\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class MakeCrudCommandTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_run_make_crud_command(): void
     {
         $this->artisan('make:crud', [
@@ -17,7 +19,7 @@ class MakeCrudCommandTest extends TestCase
         ->assertExitCode(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_all_files(): void
     {
         $this->artisan('make:crud', [
@@ -40,7 +42,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/views/products/index.blade.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_crud_with_relations(): void
     {
         $this->artisan('make:crud', [
@@ -56,7 +58,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('belongsTo', $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_api_only_controller(): void
     {
         $this->artisan('make:crud', [
@@ -74,7 +76,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertDirectoryDoesNotExist($this->testOutputPath . '/views/tasks');
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_routes_to_web_file(): void
     {
         $this->artisan('make:crud', [
@@ -88,7 +90,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("Route::resource('categories'", $routeContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_routes_to_api_file_when_api_only(): void
     {
         $this->artisan('make:crud', [
@@ -103,7 +105,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("Route::apiResource('items'", $routeContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_nested_model_names(): void
     {
         $this->artisan('make:crud', [
@@ -117,7 +119,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('namespace App\\Models\\Blog;', $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_enum_fields_correctly(): void
     {
         $this->artisan('make:crud', [
@@ -139,7 +141,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('<select', $formContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_nullable_fields_correctly(): void
     {
         $this->artisan('make:crud', [
@@ -157,7 +159,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('nullable', $requestContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_belongs_to_many_relations(): void
     {
         $this->artisan('make:crud', [
@@ -172,7 +174,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('belongsToMany', $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_force_option(): void
     {
         // First run
@@ -203,7 +205,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'description'", $forcedContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_outputs_success_message(): void
     {
         $this->artisan('make:crud', [
@@ -213,7 +215,7 @@ class MakeCrudCommandTest extends TestCase
         ->expectsOutputToContain('CRUD succesvol gegenereerd');
     }
 
-    /** @test */
+    #[Test]
     public function it_outputs_next_steps(): void
     {
         $this->artisan('make:crud', [
@@ -223,7 +225,7 @@ class MakeCrudCommandTest extends TestCase
         ->expectsOutputToContain('Volgende stappen');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_correct_view_folder_for_plural_models(): void
     {
         $this->artisan('make:crud', [
@@ -234,7 +236,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertDirectoryExists($this->testOutputPath . '/views/categories');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_belongs_to_relation(): void
     {
         $this->artisan('make:crud', [
@@ -249,7 +251,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('User::factory()', $factoryContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_seeder_correctly(): void
     {
         $this->artisan('make:crud', [
@@ -263,7 +265,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString('Tag::factory()', $seederContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_resource_with_fields(): void
     {
         $this->artisan('make:crud', [
@@ -280,7 +282,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'updated_at'", $resourceContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_resource_with_relations(): void
     {
         $this->artisan('make:crud', [
@@ -296,7 +298,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'pages'", $resourceContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_custom_foreign_key(): void
     {
         $this->artisan('make:crud', [
@@ -319,7 +321,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'author_id' => \\App\\Models\\User::factory()", $factoryContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_eager_loading(): void
     {
         $this->artisan('make:crud', [
@@ -335,7 +337,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'invoiceLines'", $controllerContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_correct_casts(): void
     {
         $this->artisan('make:crud', [
@@ -351,7 +353,7 @@ class MakeCrudCommandTest extends TestCase
         $this->assertStringContainsString("'expires_at' => 'datetime'", $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_multiple_modifiers(): void
     {
         $this->artisan('make:crud', [

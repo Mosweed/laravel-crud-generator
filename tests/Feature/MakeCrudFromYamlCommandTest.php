@@ -2,6 +2,8 @@
 
 namespace Mosweed\CrudGenerator\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +18,7 @@ class MakeCrudFromYamlCommandTest extends TestCase
         $this->yamlPath = $this->testOutputPath . '/crud-config.yaml';
     }
 
-    /** @test */
+    #[Test]
     public function it_can_run_yaml_command(): void
     {
         $yaml = <<<YAML
@@ -35,7 +37,7 @@ YAML;
         ->assertExitCode(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_multiple_models_from_yaml(): void
     {
         $yaml = <<<YAML
@@ -60,7 +62,7 @@ YAML;
         $this->assertFileExists($this->testOutputPath . '/Models/Product.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_yaml_with_relations(): void
     {
         $yaml = <<<YAML
@@ -87,7 +89,7 @@ YAML;
         $this->assertStringContainsString('public function user()', $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_yaml_with_field_modifiers(): void
     {
         $yaml = <<<YAML
@@ -116,7 +118,7 @@ YAML;
         $this->assertStringContainsString('->nullable()', $migrationContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_yaml_with_enum_fields(): void
     {
         $yaml = <<<YAML
@@ -140,7 +142,7 @@ YAML;
         $this->assertStringContainsString('enum', $migrationContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_fails_gracefully_for_missing_file(): void
     {
         $this->artisan('make:crud-yaml', [
@@ -149,7 +151,7 @@ YAML;
         ->assertExitCode(1);
     }
 
-    /** @test */
+    #[Test]
     public function it_fails_gracefully_for_invalid_yaml(): void
     {
         $invalidYaml = <<<YAML
@@ -168,7 +170,7 @@ YAML;
         ->assertExitCode(1);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_yaml_with_custom_foreign_keys(): void
     {
         $yaml = <<<YAML
@@ -192,7 +194,7 @@ YAML;
         $this->assertStringContainsString("'author_id'", $modelContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_force_option(): void
     {
         $yaml = <<<YAML
@@ -217,7 +219,7 @@ YAML;
         ->assertExitCode(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_complete_crud_for_complex_yaml(): void
     {
         $yaml = <<<YAML
@@ -296,7 +298,7 @@ YAML;
         $this->assertStringContainsString('public function comments()', $postContent);
     }
 
-    /** @test */
+    #[Test]
     public function it_outputs_progress_for_each_model(): void
     {
         $yaml = <<<YAML

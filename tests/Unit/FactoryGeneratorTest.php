@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\FactoryGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class FactoryGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_factory_file(): void
     {
         $config = [
@@ -27,7 +29,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/factories/PostFactory.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_correct_model_reference(): void
     {
         $config = [
@@ -46,7 +48,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('protected $model = Post::class;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_faker_definitions(): void
     {
         $config = [
@@ -71,7 +73,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('fake()->', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_email_faker(): void
     {
         $config = [
@@ -90,7 +92,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('safeEmail()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_boolean_faker(): void
     {
         $config = [
@@ -109,7 +111,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('fake()->boolean()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_date_faker(): void
     {
         $config = [
@@ -130,7 +132,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('fake()->dateTime()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_enum_faker(): void
     {
         $config = [
@@ -149,7 +151,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString("fake()->randomElement(['draft', 'published', 'archived'])", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_related_model_for_belongs_to(): void
     {
         $config = [
@@ -170,7 +172,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString("'user_id' => \\App\\Models\\User::factory()", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_custom_foreign_key(): void
     {
         $config = [
@@ -189,7 +191,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString("'author_id' => \\App\\Models\\User::factory()", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_states_for_enum(): void
     {
         $config = [
@@ -210,7 +212,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('public function published()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_states_for_boolean(): void
     {
         $config = [
@@ -231,7 +233,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('public function notIsFeatured()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_price_faker(): void
     {
         $config = [
@@ -250,7 +252,7 @@ class FactoryGeneratorTest extends TestCase
         $this->assertStringContainsString('randomFloat(2', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_factory_with_json_faker(): void
     {
         $config = [

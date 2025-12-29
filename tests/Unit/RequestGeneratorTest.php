@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\RequestGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class RequestGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_store_request_file(): void
     {
         $config = [
@@ -27,7 +29,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/Requests/StorePostRequest.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_update_request_file(): void
     {
         $config = [
@@ -45,7 +47,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/Requests/UpdatePostRequest.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_store_request_with_required_rules(): void
     {
         $config = [
@@ -64,7 +66,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString("'title' => 'required", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_update_request_with_sometimes_rules(): void
     {
         $config = [
@@ -83,7 +85,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString("'title' => 'sometimes", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_nullable_rules(): void
     {
         $config = [
@@ -102,7 +104,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString("'subtitle' => 'nullable", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_type_rules(): void
     {
         $config = [
@@ -128,7 +130,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString('date', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_enum_rules(): void
     {
         $config = [
@@ -147,7 +149,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString('in:draft,published', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_custom_messages(): void
     {
         $config = [
@@ -168,7 +170,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString("'title.required'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_numeric_rules(): void
     {
         $config = [
@@ -188,7 +190,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString('numeric', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_that_authorizes(): void
     {
         $config = [
@@ -207,7 +209,7 @@ class RequestGeneratorTest extends TestCase
         $this->assertStringContainsString('return true;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_request_with_json_rules(): void
     {
         $config = [

@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\ModelGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class ModelGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_model_file(): void
     {
         $config = [
@@ -27,7 +29,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/Models/Post.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_correct_namespace(): void
     {
         $config = [
@@ -44,7 +46,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('namespace App\\Models;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_fillable_attributes(): void
     {
         $config = [
@@ -67,7 +69,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString("'views'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_casts(): void
     {
         $config = [
@@ -90,7 +92,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString("'metadata' => 'array'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_belongs_to_relation(): void
     {
         $config = [
@@ -111,7 +113,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('User::class', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_has_many_relation(): void
     {
         $config = [
@@ -131,7 +133,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('return $this->hasMany(', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_belongs_to_many_relation(): void
     {
         $config = [
@@ -151,7 +153,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('return $this->belongsToMany(', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_has_factory_trait(): void
     {
         $config = [
@@ -169,7 +171,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('use Illuminate\Database\Eloquent\Factories\HasFactory;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_soft_deletes_trait(): void
     {
         config(['crud-generator.soft_deletes' => true]);
@@ -189,7 +191,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString('use Illuminate\Database\Eloquent\SoftDeletes;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_correct_table_name(): void
     {
         $config = [
@@ -206,7 +208,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString("protected \$table = 'blog_posts';", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_foreign_key_to_fillable_for_belongs_to(): void
     {
         $config = [
@@ -227,7 +229,7 @@ class ModelGeneratorTest extends TestCase
         $this->assertStringContainsString("'category_id'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_model_with_custom_foreign_key_in_relation(): void
     {
         $config = [

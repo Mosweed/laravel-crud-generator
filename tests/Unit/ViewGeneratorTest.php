@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\ViewGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class ViewGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_all_view_files(): void
     {
         $config = [
@@ -31,7 +33,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/views/posts/_form.blade.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_index_view_with_table(): void
     {
         $config = [
@@ -55,7 +57,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('$posts', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_index_view_with_search(): void
     {
         $config = [
@@ -76,7 +78,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('Zoeken', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_index_view_with_pagination(): void
     {
         $config = [
@@ -93,7 +95,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('->links()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_index_view_with_action_buttons(): void
     {
         $config = [
@@ -113,7 +115,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('Verwijderen', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_create_view_with_form(): void
     {
         $config = [
@@ -136,7 +138,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('@include(\'posts._form\')', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_edit_view_with_form(): void
     {
         $config = [
@@ -157,7 +159,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString("route('posts.update'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_show_view_with_details(): void
     {
         $config = [
@@ -181,7 +183,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('updated_at', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_partial_with_fields(): void
     {
         $config = [
@@ -205,7 +207,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('name="is_published"', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_text_input(): void
     {
         $config = [
@@ -224,7 +226,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('type="text"', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_textarea(): void
     {
         $config = [
@@ -243,7 +245,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('<textarea', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_checkbox(): void
     {
         $config = [
@@ -262,7 +264,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('type="checkbox"', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_select_for_enum(): void
     {
         $config = [
@@ -285,7 +287,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('Published', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_validation_errors(): void
     {
         $config = [
@@ -306,7 +308,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('$message', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_form_with_old_values(): void
     {
         $config = [
@@ -325,7 +327,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString("old('title'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_views_with_tailwind_classes(): void
     {
         $config = [
@@ -345,7 +347,7 @@ class ViewGeneratorTest extends TestCase
         $this->assertStringContainsString('shadow', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_view_for_camel_case_model(): void
     {
         $config = [

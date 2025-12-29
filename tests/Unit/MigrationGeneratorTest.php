@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\MigrationGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class MigrationGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_migration_file(): void
     {
         $config = [
@@ -31,7 +33,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertCount(1, $files);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_correct_table_name(): void
     {
         $config = [
@@ -53,7 +55,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString("Schema::create('blog_posts'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_columns(): void
     {
         $config = [
@@ -80,7 +82,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString("\$table->boolean('is_active')", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_foreign_key_for_belongs_to(): void
     {
         $config = [
@@ -104,7 +106,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString("->constrained()", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_custom_foreign_key(): void
     {
         $config = [
@@ -127,7 +129,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString("foreignId('author_id')", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_timestamps(): void
     {
         $config = [
@@ -146,7 +148,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString('$table->timestamps()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_soft_deletes(): void
     {
         $config = [
@@ -165,7 +167,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString('$table->softDeletes()', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_enum_column(): void
     {
         $config = [
@@ -186,7 +188,7 @@ class MigrationGeneratorTest extends TestCase
         $this->assertStringContainsString("\$table->enum('status', ['draft', 'published'])", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_migration_with_unique_constraint(): void
     {
         $config = [

@@ -2,13 +2,15 @@
 
 namespace Mosweed\CrudGenerator\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
+
 use Mosweed\CrudGenerator\Generators\ControllerGenerator;
 use Mosweed\CrudGenerator\Tests\TestCase;
 use Illuminate\Support\Facades\File;
 
 class ControllerGeneratorTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_generates_controller_file(): void
     {
         $config = [
@@ -27,7 +29,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertFileExists($this->testOutputPath . '/Controllers/PostController.php');
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_correct_namespace(): void
     {
         $config = [
@@ -44,7 +46,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('namespace App\\Http\\Controllers;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_all_crud_methods(): void
     {
         $config = [
@@ -68,7 +70,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('public function destroy(', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_form_request_imports(): void
     {
         $config = [
@@ -87,7 +89,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('use App\\Http\\Requests\\UpdatePostRequest;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_model_import(): void
     {
         $config = [
@@ -104,7 +106,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('use App\\Models\\Post;', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_correct_variable_names(): void
     {
         $config = [
@@ -123,7 +125,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('$blogPosts', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_view_references(): void
     {
         $config = [
@@ -144,7 +146,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString("view('posts.edit'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_route_references(): void
     {
         $config = [
@@ -163,7 +165,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString("route('posts.index'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_api_controller_when_api_only(): void
     {
         $config = [
@@ -188,7 +190,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('PostResource', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_eager_loading_for_relations(): void
     {
         $config = [
@@ -211,7 +213,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString("'comments'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_search_functionality(): void
     {
         $config = [
@@ -234,7 +236,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString("'body'", $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_pagination(): void
     {
         $config = [
@@ -251,7 +253,7 @@ class ControllerGeneratorTest extends TestCase
         $this->assertStringContainsString('->paginate(', $content);
     }
 
-    /** @test */
+    #[Test]
     public function it_generates_controller_with_sorting(): void
     {
         $config = [
